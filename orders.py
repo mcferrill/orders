@@ -3,8 +3,6 @@
 import fitz # PyMuPDF
 import re
 import sys
-# import tkinter as tk
-# from tkinter import filedialog, scrolledtext
 
 # Function to extract text from PDF
 def extract_text_from_pdf(pdf_path):
@@ -69,38 +67,13 @@ def convert_to_single_line_order(extracted_text):
 
     return orders
 
-# Function to open PDF file and process it
-def open_file():
-    file_path = filedialog.askopenfilename(filetypes=[("PDF files", "*.pdf")])
-    if file_path:
-        extracted_text = extract_text_from_pdf(file_path)
-        orders = convert_to_single_line_order(extracted_text)
 
-        # Display orders in the text box
-        result_text.delete(1.0, tk.END)
-        for order in orders:
-            result_text.insert(tk.END, order + "\n")
-
-def cli():
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print('''usage: python orders.py PDF_NAME
+To output to file use:
+python orders.py PDF_NAME > OUTPUT.txt''')
     text = extract_text_from_pdf(sys.argv[1])
     for order in convert_to_single_line_order(text):
         print(order)
-
-if __name__ == '__main__':
-    # Set up the main application window
-    # root = tk.Tk()
-    # root.title("PDF to Medication Order Converter")
-    #
-    # # Set up the frame and buttons
-    # frame = tk.Frame(root)
-    # frame.pack(padx=10, pady=10)
-    # open_button = tk.Button(frame, text="Open PDF", command=open_file)
-    # open_button.pack(side=tk.LEFT)
-    #
-    # # Set up the text box for displaying results
-    # result_text = scrolledtext.ScrolledText(root, wrap=tk.WORD, width=100, height=30)
-    # result_text.pack(padx=10, pady=10)
-    #
-    # # Run the application
-    # root.mainloop()
-    cli()
+        print()
