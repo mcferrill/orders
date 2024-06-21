@@ -71,9 +71,12 @@ def convert_to_single_line_order(extracted_text):
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print('''usage: python orders.py PDF_NAME
+
 To output to file use:
-python orders.py PDF_NAME > OUTPUT.txt''')
-    text = extract_text_from_pdf(sys.argv[1])
-    for order in convert_to_single_line_order(text):
-        print(order)
-        print()
+    python orders.py PDF_NAME > OUTPUT.txt''')
+
+    else:
+        text = extract_text_from_pdf(sys.argv[1])
+        for order in convert_to_single_line_order(text):
+            print(order)
+            print()
